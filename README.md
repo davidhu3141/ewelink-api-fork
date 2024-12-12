@@ -23,7 +23,7 @@ const ewelink = requireEwelink // instead of require('ewelink') or `MyLibrary.ew
 </script>
 ```
 
-to mimic the commonJS style `const ewelink = require('ewelink')`
+which mimics the commonJS style `const ewelink = require('ewelink')`
 
 <br>
 
