@@ -1,15 +1,35 @@
-const crypto = require('crypto');
+// const crypto = require('crypto');
 const CryptoJS = require('crypto-js');
 const random = require('random');
 
 const DEVICE_TYPE_UUID = require('../data/devices-type-uuid.json');
 const DEVICE_CHANNEL_LENGTH = require('../data/devices-channel-length.json');
 
-const makeAuthorizationSign = (APP_SECRET, body) =>
-  crypto
-    .createHmac('sha256', APP_SECRET)
-    .update(JSON.stringify(body))
-    .digest('base64');
+async function createHmacSHA256(secret, body) {
+  // Convert the secret and body into Uint8Array
+  const encoder = new TextEncoder();
+  const keyData = encoder.encode(secret);
+  const bodyData = encoder.encode(JSON.stringify(body));
+
+  // Import the secret as a CryptoKey
+  const key = await crypto.subtle.importKey(
+    'raw', 
+    keyData, 
+    { name: 'HMAC', hash: { name: 'SHA-256' } }, 
+    false, 
+    ['sign']
+  );
+
+  // Sign the body data with the secret key
+  const signature = await crypto.subtle.sign('HMAC', key, bodyData);
+
+  // Convert the signature (an ArrayBuffer) to a base64 string
+  const base64Signature = btoa(String.fromCharCode(...new Uint8Array(signature)));
+
+  return base64Signature;
+}
+
+const makeAuthorizationSign = createHmacSHA256
 
 const getDeviceTypeByUiid = uiid => DEVICE_TYPE_UUID[uiid] || '';
 

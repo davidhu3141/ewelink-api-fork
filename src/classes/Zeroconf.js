@@ -1,4 +1,56 @@
-const fs = require('fs');
+const fs =  {
+  writeFile: (filename, data, callback) => {
+    try {
+      localStorage.setItem(filename, data);
+      if (callback) callback(null);
+    } catch (error) {
+      if (callback) callback(error);
+    }
+  },
+  
+  writeFileSync: (filename, data) => {
+    try {
+      localStorage.setItem(filename, data);
+    } catch (error) {
+      throw error;
+    }
+  },
+  
+  readFile: (filename, callback) => {
+    try {
+      const data = localStorage.getItem(filename);
+      if (callback) callback(null, data);
+    } catch (error) {
+      if (callback) callback(error);
+    }
+  },
+  
+  readFileSync: (filename) => {
+    try {
+      return localStorage.getItem(filename);
+    } catch (error) {
+      throw error;
+    }
+  },
+  
+  unlink: (filename, callback) => {
+    try {
+      localStorage.removeItem(filename);
+      if (callback) callback(null);
+    } catch (error) {
+      if (callback) callback(error);
+    }
+  },
+  
+  unlinkSync: (filename) => {
+    try {
+      localStorage.removeItem(filename);
+    } catch (error) {
+      throw error;
+    }
+  }
+};
+
 const arpping = require('arpping')({});
 
 class Zeroconf {

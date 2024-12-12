@@ -24,7 +24,7 @@ module.exports = {
     const request = await fetch(`${this.getApiUrl()}/user/login`, {
       method: 'post',
       headers: {
-        Authorization: `Sign ${makeAuthorizationSign(APP_SECRET, body)}`,
+        Authorization: `Sign ${await makeAuthorizationSign(APP_SECRET, body)}`,
       },
       body: JSON.stringify(body),
     });
