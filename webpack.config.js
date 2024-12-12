@@ -23,7 +23,7 @@ module.exports = (env, argv) => {
     externals: [nodeExternals({
       allowlist: [/.*/]  // Optionally include specific modules
     })],
-    devtool: isProduction ? false : 'eval-source-map', // Conditionally set devtool
+    devtool: isProduction ? false : 'inline-source-map',
     module: {
       rules: [
         {

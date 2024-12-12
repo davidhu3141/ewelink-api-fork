@@ -21,7 +21,7 @@
   ],
   "main": "main.js",
   "scripts": {
-    "build": "export NODE_ENV=development; webpack --mode production",
+    "build": "webpack --mode production",
     "build-dev": "webpack --mode development"
   },
   "dependencies": {
