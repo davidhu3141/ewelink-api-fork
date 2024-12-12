@@ -5,7 +5,7 @@
 ## "my build"
 
 ```sh
-npm i
+npm i # first download
 npm run build # smaller
 npm run build-dev # with line-break
 ```
