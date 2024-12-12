@@ -12,6 +12,18 @@ npm run build-dev # with line-break
 
 ignore the 'Conflicting' warning.
 
+---
+
+The exported object is called `requireEwelink` so that in browser you can use
+
+```html
+<script>
+const ewelink = requireEwelink // instead of require('ewelink') or `MyLibrary.ewelink`
+// ... you code
+</script>
+```
+
+to mimic the commonJS style `const ewelink = require('ewelink')`
 
 <br>
 
@@ -25,7 +37,7 @@ ignore the 'Conflicting' warning.
 
 ## Installation
 ```sh
- npm install ewelink-api
+npm install ewelink-api
 ```
 
 
